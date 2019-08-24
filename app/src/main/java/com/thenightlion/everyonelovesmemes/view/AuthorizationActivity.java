@@ -11,8 +11,10 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.thenightlion.everyonelovesmemes.R;
+import com.thenightlion.everyonelovesmemes.model.AuthInfoDto;
 import com.thenightlion.everyonelovesmemes.model.LoginUserRequestDto;
 import com.thenightlion.everyonelovesmemes.api.Service;
 
@@ -89,28 +91,30 @@ public class AuthorizationActivity extends AppCompatActivity {
         progressBar.bringToFront();
         btnAuthorization.setText("");
 
+        LoginUserRequestDto body = new LoginUserRequestDto();
+        body.setLogin(login);
+        body.setPassword(password);
+
         Service.getInstance()
                 .getServiceApi()
-                .loginWithCredentials(login, password)
-                .enqueue(new Callback<LoginUserRequestDto>() {
+                .loginWithCredentials(body)
+                .enqueue(new Callback<AuthInfoDto>() {
                     @Override
-                    public void onResponse(@NonNull Call<LoginUserRequestDto> call, @NonNull Response<LoginUserRequestDto> response) {
+                    public void onResponse(@NonNull Call<AuthInfoDto> call, @NonNull Response<AuthInfoDto> response) {
                         progressBar.setVisibility(View.INVISIBLE);
-                        btnAuthorization.setText("Войти");
+                        btnAuthorization.setText(getString(R.string.btn_authorization));
+                        if (response.isSuccessful()) {
+                            AuthInfoDto authInfoDto = response.body();
+                            assert authInfoDto != null;
+                            //Toast.makeText(AuthorizationActivity.this, authInfoDto.getAccessToken(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            errorSnackbar(getString(R.string.error_login_or_password2));
+                        }
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<LoginUserRequestDto> call, @NonNull Throwable t) {
-                        Snackbar snackbar = Snackbar.make(relativeLayout,
-                                getString(R.string.error_login_or_password),
-                                Snackbar.LENGTH_LONG).setAction("Action", null);
-                        View sbView = snackbar.getView();
-                        sbView.setBackgroundColor(ContextCompat.getColor(AuthorizationActivity.this,
-                                R.color.colorRed));
-                        snackbar.show();
-
-                        progressBar.setVisibility(View.INVISIBLE);
-                        btnAuthorization.setText("Войти");
+                    public void onFailure(@NonNull Call<AuthInfoDto> call, @NonNull Throwable t) {
+                        errorSnackbar(getString(R.string.error_login_or_password));
                     }
                 });
     }
@@ -123,5 +127,17 @@ public class AuthorizationActivity extends AppCompatActivity {
         textFieldBoxesLogin = findViewById(R.id.text_field_boxes_login);
         textFieldBoxesPassword = findViewById(R.id.text_field_boxes_password);
         relativeLayout = findViewById(R.id.layout_login);
+    }
+
+    private void errorSnackbar(String errorText) {
+        Snackbar snackbar = Snackbar.make(relativeLayout, errorText,
+                Snackbar.LENGTH_LONG).setAction("Action", null);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(ContextCompat.getColor(AuthorizationActivity.this,
+                R.color.colorRed));
+        snackbar.show();
+
+        progressBar.setVisibility(View.INVISIBLE);
+        btnAuthorization.setText(getString(R.string.btn_authorization));
     }
 }

@@ -1,6 +1,11 @@
 package com.thenightlion.everyonelovesmemes.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class AuthInfoDto {
+    @SerializedName("accessToken")
+    @Expose
     private String accessToken;
 
     public String getAccessToken() {
