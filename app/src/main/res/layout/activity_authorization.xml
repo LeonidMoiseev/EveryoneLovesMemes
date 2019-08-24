@@ -1,9 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorDarkBlue"
+    android:baselineAligned="false"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     tools:context=".AuthorizationActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/text_field_boxes_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        app:errorColor="@color/colorRed"
+        app:helperTextColor="@color/colorWhite"
+        app:labelText="@string/hint_login"
+        app:panelBackgroundColor="#0DFFFFFF"
+        app:primaryColor="@color/colorBlue"
+        app:secondaryColor="@color/colorGray">
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/login_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:lineSpacingExtra="6sp"
+            android:textColor="@color/colorWhite" />
+
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/text_field_boxes_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_field_boxes_login"
+        android:layout_marginTop="16dp"
+        app:errorColor="@color/colorRed"
+        app:helperText="@string/hint_password_length"
+        app:endIcon="@drawable/eye_false"
+        app:helperTextColor="@color/colorWhite"
+        app:labelText="@string/hint_password"
+        app:panelBackgroundColor="@color/colorDarkGray"
+        app:primaryColor="@color/colorBlue"
+        app:secondaryColor="@color/colorGray">
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/password_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberPassword"
+            android:lineSpacingExtra="6sp"
+            android:maxLength="10"
+            android:textColor="@color/colorWhite" />
+
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:theme="@style/CircularProgress"/>
+
+        <TextView
+            android:id="@+id/button_authorization"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/btn_authorization"
+            style="@style/ButtonCustom"/>
+
+    </FrameLayout>
+
+</RelativeLayout>
