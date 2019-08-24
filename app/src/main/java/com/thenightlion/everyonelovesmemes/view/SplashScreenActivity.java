@@ -1,21 +1,23 @@
-package com.thenightlion.everyonelovesmemes;
+package com.thenightlion.everyonelovesmemes.view;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.thenightlion.everyonelovesmemes.R;
+
+public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash_screen);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(MainActivity.this, AuthorizationActivity.class));
+                startActivity(new Intent(SplashScreenActivity.this, AuthorizationActivity.class));
                 finish();
             }
         }, 300);
