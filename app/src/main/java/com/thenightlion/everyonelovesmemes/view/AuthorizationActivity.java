@@ -1,5 +1,8 @@
 package com.thenightlion.everyonelovesmemes.view;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -11,7 +14,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.thenightlion.everyonelovesmemes.R;
 import com.thenightlion.everyonelovesmemes.model.AuthInfoDto;
@@ -25,6 +27,16 @@ import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 public class AuthorizationActivity extends AppCompatActivity {
+
+    public static final String APP_PREFERENCES = "mySettings";
+    public static final String APP_PREFERENCES_TOKEN = "token";
+    public static final String APP_PREFERENCES_ID = "id";
+    public static final String APP_PREFERENCES_USERNAME = "username";
+    public static final String APP_PREFERENCES_FIRST_NAME = "firstName";
+    public static final String APP_PREFERENCES_LAST_NAME = "lastName";
+    public static final String APP_PREFERENCES_USER_DESCRIPTION = "userDescription";
+
+    SharedPreferences mSettings;
 
     ExtendedEditText loginET;
     ExtendedEditText passwordET;
@@ -104,11 +116,17 @@ public class AuthorizationActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.INVISIBLE);
                         btnAuthorization.setText(getString(R.string.btn_authorization));
                         if (response.isSuccessful()) {
-                            AuthInfoDto authInfoDto = response.body();
-                            assert authInfoDto != null;
-                            //Toast.makeText(AuthorizationActivity.this, authInfoDto.getAccessToken(), Toast.LENGTH_SHORT).show();
+
+                            AuthInfoDto body = response.body();
+                            if (body != null) {
+
+                                saveTokenAndUserInfo(body);
+                                startActivity(new Intent(AuthorizationActivity.this, MainActivity.class));
+                                finish();
+
+                            }
                         } else {
-                            errorSnackbar(getString(R.string.error_login_or_password2));
+                            errorSnackbar(getString(R.string.error_login_or_password));
                         }
                     }
 
@@ -139,5 +157,17 @@ public class AuthorizationActivity extends AppCompatActivity {
 
         progressBar.setVisibility(View.INVISIBLE);
         btnAuthorization.setText(getString(R.string.btn_authorization));
+    }
+
+    private void saveTokenAndUserInfo(AuthInfoDto authInfoDto) {
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString(APP_PREFERENCES_TOKEN, authInfoDto.getAccessToken());
+        editor.putInt(APP_PREFERENCES_ID, authInfoDto.userInfo.getId());
+        editor.putString(APP_PREFERENCES_USERNAME, authInfoDto.userInfo.getUserName());
+        editor.putString(APP_PREFERENCES_FIRST_NAME, authInfoDto.userInfo.getFirstName());
+        editor.putString(APP_PREFERENCES_LAST_NAME, authInfoDto.userInfo.getLastName());
+        editor.putString(APP_PREFERENCES_USER_DESCRIPTION, authInfoDto.userInfo.getUserDescription());
+        editor.apply();
     }
 }
