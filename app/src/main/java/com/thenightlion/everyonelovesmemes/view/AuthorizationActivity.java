@@ -1,5 +1,8 @@
 package com.thenightlion.everyonelovesmemes.view;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.thenightlion.everyonelovesmemes.R;
+import com.thenightlion.everyonelovesmemes.model.AuthInfoDto;
 import com.thenightlion.everyonelovesmemes.model.LoginUserRequestDto;
 import com.thenightlion.everyonelovesmemes.api.Service;
 
@@ -23,6 +27,16 @@ import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 public class AuthorizationActivity extends AppCompatActivity {
+
+    public static final String APP_PREFERENCES = "mySettings";
+    public static final String APP_PREFERENCES_TOKEN = "token";
+    public static final String APP_PREFERENCES_ID = "id";
+    public static final String APP_PREFERENCES_USERNAME = "username";
+    public static final String APP_PREFERENCES_FIRST_NAME = "firstName";
+    public static final String APP_PREFERENCES_LAST_NAME = "lastName";
+    public static final String APP_PREFERENCES_USER_DESCRIPTION = "userDescription";
+
+    SharedPreferences mSettings;
 
     ExtendedEditText loginET;
     ExtendedEditText passwordET;
@@ -89,28 +103,36 @@ public class AuthorizationActivity extends AppCompatActivity {
         progressBar.bringToFront();
         btnAuthorization.setText("");
 
+        LoginUserRequestDto body = new LoginUserRequestDto();
+        body.setLogin(login);
+        body.setPassword(password);
+
         Service.getInstance()
                 .getServiceApi()
-                .loginWithCredentials(login, password)
-                .enqueue(new Callback<LoginUserRequestDto>() {
+                .loginWithCredentials(body)
+                .enqueue(new Callback<AuthInfoDto>() {
                     @Override
-                    public void onResponse(@NonNull Call<LoginUserRequestDto> call, @NonNull Response<LoginUserRequestDto> response) {
+                    public void onResponse(@NonNull Call<AuthInfoDto> call, @NonNull Response<AuthInfoDto> response) {
                         progressBar.setVisibility(View.INVISIBLE);
-                        btnAuthorization.setText("Войти");
+                        btnAuthorization.setText(getString(R.string.btn_authorization));
+                        if (response.isSuccessful()) {
+
+                            AuthInfoDto body = response.body();
+                            if (body != null) {
+
+                                saveTokenAndUserInfo(body);
+                                startActivity(new Intent(AuthorizationActivity.this, MainActivity.class));
+                                finish();
+
+                            }
+                        } else {
+                            errorSnackbar(getString(R.string.error_login_or_password));
+                        }
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<LoginUserRequestDto> call, @NonNull Throwable t) {
-                        Snackbar snackbar = Snackbar.make(relativeLayout,
-                                getString(R.string.error_login_or_password),
-                                Snackbar.LENGTH_LONG).setAction("Action", null);
-                        View sbView = snackbar.getView();
-                        sbView.setBackgroundColor(ContextCompat.getColor(AuthorizationActivity.this,
-                                R.color.colorRed));
-                        snackbar.show();
-
-                        progressBar.setVisibility(View.INVISIBLE);
-                        btnAuthorization.setText("Войти");
+                    public void onFailure(@NonNull Call<AuthInfoDto> call, @NonNull Throwable t) {
+                        errorSnackbar(getString(R.string.error_login_or_password));
                     }
                 });
     }
@@ -123,5 +145,29 @@ public class AuthorizationActivity extends AppCompatActivity {
         textFieldBoxesLogin = findViewById(R.id.text_field_boxes_login);
         textFieldBoxesPassword = findViewById(R.id.text_field_boxes_password);
         relativeLayout = findViewById(R.id.layout_login);
+    }
+
+    private void errorSnackbar(String errorText) {
+        Snackbar snackbar = Snackbar.make(relativeLayout, errorText,
+                Snackbar.LENGTH_LONG).setAction("Action", null);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(ContextCompat.getColor(AuthorizationActivity.this,
+                R.color.colorRed));
+        snackbar.show();
+
+        progressBar.setVisibility(View.INVISIBLE);
+        btnAuthorization.setText(getString(R.string.btn_authorization));
+    }
+
+    private void saveTokenAndUserInfo(AuthInfoDto authInfoDto) {
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString(APP_PREFERENCES_TOKEN, authInfoDto.getAccessToken());
+        editor.putInt(APP_PREFERENCES_ID, authInfoDto.userInfo.getId());
+        editor.putString(APP_PREFERENCES_USERNAME, authInfoDto.userInfo.getUserName());
+        editor.putString(APP_PREFERENCES_FIRST_NAME, authInfoDto.userInfo.getFirstName());
+        editor.putString(APP_PREFERENCES_LAST_NAME, authInfoDto.userInfo.getLastName());
+        editor.putString(APP_PREFERENCES_USER_DESCRIPTION, authInfoDto.userInfo.getUserDescription());
+        editor.apply();
     }
 }

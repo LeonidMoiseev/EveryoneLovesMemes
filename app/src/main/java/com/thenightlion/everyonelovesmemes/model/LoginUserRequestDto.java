@@ -1,11 +1,7 @@
 package com.thenightlion.everyonelovesmemes.model;
 
-import com.google.gson.annotations.SerializedName;
-
 public class LoginUserRequestDto {
-    @SerializedName("login")
     private String login;
-    @SerializedName("password")
     private String password;
 
     public String getLogin() {
