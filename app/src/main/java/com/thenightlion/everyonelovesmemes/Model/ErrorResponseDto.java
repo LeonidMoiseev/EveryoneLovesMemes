@@ -1,4 +1,4 @@
-package com.thenightlion.everyonelovesmemes.model;
+package com.thenightlion.everyonelovesmemes.Model;
 
 public class ErrorResponseDto {
     private String code;
