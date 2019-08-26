@@ -1,4 +1,6 @@
-package com.thenightlion.everyonelovesmemes.api;
+package com.thenightlion.everyonelovesmemes.Api;
+
+import com.thenightlion.everyonelovesmemes.AuthRepository.AuthApi;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -6,8 +8,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Service {
+
     private static Service mInstance;
-    private final static String BASE_URL = "http://demo3161256.mockable.io/";
+    private final static String BASE_URL = "https://demo3161256.mockable.io/";
     private Retrofit mRetrofit;
 
     private Service() {
@@ -31,7 +34,7 @@ public class Service {
         return mInstance;
     }
 
-    public ServiceApi getServiceApi() {
-        return mRetrofit.create(ServiceApi.class);
+    public AuthApi getAuthApi() {
+        return mRetrofit.create(AuthApi.class);
     }
 }

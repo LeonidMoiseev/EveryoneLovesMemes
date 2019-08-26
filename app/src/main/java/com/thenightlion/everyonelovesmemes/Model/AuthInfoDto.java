@@ -1,4 +1,4 @@
-package com.thenightlion.everyonelovesmemes.model;
+package com.thenightlion.everyonelovesmemes.Model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
