@@ -1,18 +1,27 @@
 package com.thenightlion.everyonelovesmemes.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class MemDto {
-    private int id;
+
+    @SerializedName("id")
+    private long id;
+    @SerializedName("title")
     private String title;
+    @SerializedName("description")
     private String description;
+    @SerializedName("isFavorite")
     private boolean isFavorite;
-    private Integer createdDate;
+    @SerializedName("createdDate")
+    private int createdDate;
+    @SerializedName("photoUtl")
     private String photoUtl;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -40,11 +49,11 @@ public class MemDto {
         isFavorite = favorite;
     }
 
-    public Integer getCreatedDate() {
+    public int getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Integer createdDate) {
+    public void setCreatedDate(int createdDate) {
         this.createdDate = createdDate;
     }
 

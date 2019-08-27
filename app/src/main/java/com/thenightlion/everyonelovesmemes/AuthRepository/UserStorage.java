@@ -2,7 +2,6 @@ package com.thenightlion.everyonelovesmemes.AuthRepository;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.widget.Toast;
 
 import com.thenightlion.everyonelovesmemes.Model.AuthInfoDto;
 
@@ -32,9 +31,9 @@ public class UserStorage {
 
     ////тестовый
     public void getUser(Context context) {
-        Toast.makeText(context, mSettings.getString(APP_PREFERENCES_TOKEN, ""), Toast.LENGTH_SHORT).show();
+        /*Toast.makeText(context, mSettings.getString(APP_PREFERENCES_TOKEN, ""), Toast.LENGTH_SHORT).show();
         Toast.makeText(context, Integer.toString(mSettings.getInt(APP_PREFERENCES_ID, 0)), Toast.LENGTH_SHORT).show();
         Toast.makeText(context, mSettings.getString(APP_PREFERENCES_USERNAME, ""), Toast.LENGTH_SHORT).show();
-        Toast.makeText(context, mSettings.getString(APP_PREFERENCES_FIRST_NAME, ""), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, mSettings.getString(APP_PREFERENCES_FIRST_NAME, ""), Toast.LENGTH_SHORT).show();*/
     }
 }

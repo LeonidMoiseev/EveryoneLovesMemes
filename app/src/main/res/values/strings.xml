@@ -13,7 +13,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="desc_popular_memes">popular memes</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_load_memes">Произошла ошибка</string>
+    <string name="error_load_memes2">Не удалось загрузить ленту\nОбновите экран или попробуйте позже.</string>
 </resources>

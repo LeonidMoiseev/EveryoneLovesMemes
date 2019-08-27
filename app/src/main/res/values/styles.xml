@@ -17,6 +17,10 @@
         <item name="colorAccent">@color/colorDarkBlue</item>
     </style>
 
+    <style name="CircularProgress2" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/colorBlue</item>
+    </style>
+
     <style name="ButtonCustom" parent="Theme.AppCompat">
         <item name="android:background">@drawable/ripple_btn</item>
         <item name="android:textSize">14sp</item>

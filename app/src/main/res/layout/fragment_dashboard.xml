@@ -1,17 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".View.Fragments.DashboardFragment"
     android:background="@color/colorDarkBlue"
-    tools:context=".View.Fragments.DashboardFragment">
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp">
+
+    <ProgressBar
+        android:id="@+id/progressBarLoadMemes"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        android:theme="@style/CircularProgress2"/>
 
     <TextView
+        android:id="@+id/errorLoadMemesTV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="dashboard"
-        android:textColor="@color/colorWhite"
-        android:textSize="30sp"/>
+        android:layout_height="wrap_content"
+        android:text="@string/error_load_memes2"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        android:textColor="@color/colorErrorLoadMemTV"/>
 
-</FrameLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"/>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>
