@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:backgroundTint="@color/colorDarkBlue2"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="4dp"
+    android:layout_margin="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,12 +14,12 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/memeImage"
+            android:id="@+id/memImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/memeTitle"
+            android:id="@+id/memTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
@@ -39,7 +40,7 @@
             android:layout_marginBottom="15dp">
 
             <ImageButton
-                android:id="@+id/memeFavorite"
+                android:id="@+id/memFavorite"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="20dp"
@@ -47,7 +48,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"/>
 
             <ImageButton
-                android:id="@+id/memeShare"
+                android:id="@+id/memShare"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_share"

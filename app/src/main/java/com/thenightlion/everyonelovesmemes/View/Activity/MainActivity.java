@@ -1,6 +1,5 @@
 package com.thenightlion.everyonelovesmemes.View.Activity;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;

@@ -37,4 +37,9 @@ public class Service {
     public AuthApi getAuthApi() {
         return mRetrofit.create(AuthApi.class);
     }
+
+    public MemesApi getMemesApi() {
+        return mRetrofit.create(MemesApi.class);
+    }
+
 }

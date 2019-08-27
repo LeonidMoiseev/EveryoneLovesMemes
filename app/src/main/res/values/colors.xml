@@ -11,4 +11,5 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorRed">#FF575D</color>
     <color name="colorDarkGray">#0DFFFFFF</color>
+    <color name="colorErrorLoadMemTV">#9FACC7</color>
 </resources>
