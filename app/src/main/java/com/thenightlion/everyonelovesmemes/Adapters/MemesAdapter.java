@@ -1,7 +1,10 @@
 package com.thenightlion.everyonelovesmemes.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,19 +16,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.thenightlion.everyonelovesmemes.Model.MemDto;
 import com.thenightlion.everyonelovesmemes.R;
+import com.thenightlion.everyonelovesmemes.View.Activity.ReviewMemActivity;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class MemesAdapter extends RecyclerView.Adapter<MemesAdapter.MyViewHolder> {
 
     private Context context;
     private List<MemDto> mListMem;
-    /*private int memId;
-    private String memTitle;
-    private String memDescription;
-    private boolean isFavorite;
-    private int createdDate;*/
-
 
     public MemesAdapter(Context context, List<MemDto> mListMem) {
         this.context = context;
@@ -51,6 +50,13 @@ public class MemesAdapter extends RecyclerView.Adapter<MemesAdapter.MyViewHolder
         if (mListMem.get(i).isFavorite()) {
             myViewHolder.memFavorite.setImageDrawable(context.getDrawable(R.drawable.ic_favorite_true));
         } else myViewHolder.memFavorite.setImageDrawable(context.getDrawable(R.drawable.ic_favorite_false));
+
+        myViewHolder.cellMem.setOnClickListener(v -> {
+            Intent startReviewMem = new Intent(context, ReviewMemActivity.class);
+            startReviewMem.putExtra("memNumberCell", i);
+            startReviewMem.putExtra("listMemDto", (Serializable) mListMem);
+            context.startActivity(startReviewMem);
+        });
     }
 
     @Override
@@ -64,6 +70,7 @@ public class MemesAdapter extends RecyclerView.Adapter<MemesAdapter.MyViewHolder
         TextView memTitle;
         ImageButton memFavorite;
         ImageButton memShare;
+        CardView cellMem;
 
         private MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,6 +78,7 @@ public class MemesAdapter extends RecyclerView.Adapter<MemesAdapter.MyViewHolder
             memTitle = itemView.findViewById(R.id.memTitle);
             memFavorite = itemView.findViewById(R.id.memFavorite);
             memShare = itemView.findViewById(R.id.memShare);
+            cellMem = itemView.findViewById(R.id.cell_mem);
         }
     }
 }
