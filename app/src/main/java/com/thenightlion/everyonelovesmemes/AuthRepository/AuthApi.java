@@ -9,5 +9,5 @@ import retrofit2.http.POST;
 
 public interface AuthApi {
     @POST("/auth/login")
-    Call<AuthInfoDto> loginWithCredentials(@Body LoginUserRequestDto loginUserRequestDto);
+    Call<AuthInfoDto> login(@Body LoginUserRequestDto loginUserRequestDto);
 }
