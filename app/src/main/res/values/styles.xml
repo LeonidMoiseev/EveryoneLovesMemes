@@ -29,4 +29,16 @@
         <item name="android:foreground">?attr/selectableItemBackground</item>
     </style>
 
+    <style name="TextLimitError" parent="TextAppearance.AppCompat.Small">
+    <item name="android:textColor">@color/colorRed</item>
+    </style>
+
+    <style name="HintText" parent="TextAppearance.Design.Hint">
+        <item name="android:textColor">@color/colorGray</item>
+    </style>
+
+    <style name="CounterText" parent="TextAppearance.Design.Counter">
+        <item name="android:textColor">@color/colorTransparent</item>
+    </style>
+
 </resources>

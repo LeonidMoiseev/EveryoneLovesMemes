@@ -1,13 +1,7 @@
 package com.thenightlion.everyonelovesmemes.Model;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-
 import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MemDto implements Serializable {
 

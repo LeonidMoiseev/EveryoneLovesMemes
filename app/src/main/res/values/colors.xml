@@ -13,4 +13,5 @@
     <color name="colorDarkGray">#0DFFFFFF</color>
     <color name="colorErrorLoadMemTV">#9FACC7</color>
     <color name="colorGray2">#CCFFFFFF</color>
+    <color name="colorTransparent">#00FFFFFF</color>
 </resources>
