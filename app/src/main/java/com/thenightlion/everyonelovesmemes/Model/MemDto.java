@@ -1,8 +1,15 @@
 package com.thenightlion.everyonelovesmemes.Model;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+
 import com.google.gson.annotations.SerializedName;
 
-public class MemDto {
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class MemDto implements Serializable {
 
     @SerializedName("id")
     private long id;
@@ -49,8 +56,10 @@ public class MemDto {
         isFavorite = favorite;
     }
 
-    public int getCreatedDate() {
-        return createdDate;
+    public String getCreatedDate() {
+        long dayOfCreation = (long) createdDate *1000;
+        dayOfCreation = (System.currentTimeMillis() - dayOfCreation) / (1000*60*60*24);
+        return dayOfCreation + " Дней назад";
     }
 
     public void setCreatedDate(int createdDate) {

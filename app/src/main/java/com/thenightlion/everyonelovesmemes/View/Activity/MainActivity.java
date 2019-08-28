@@ -27,22 +27,13 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(getResources().getColor(R.color.colorDarkBlue2));
-        }
-
-        dashboardFragment = new DashboardFragment();
-        addMemesFragment = new AddMemesFragment();
-        profileFragment = new ProfileFragment();
-
+        changeStatusBarColor();
+        createFragments();
         setFragment(dashboardFragment);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
-
         switch (item.getItemId()) {
             case R.id.navigation_dashboard:
                 setFragment(dashboardFragment);
@@ -61,5 +52,19 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.content_main, fragment);
         fragmentTransaction.commit();
+    }
+
+    private void createFragments() {
+        dashboardFragment = new DashboardFragment();
+        addMemesFragment = new AddMemesFragment();
+        profileFragment = new ProfileFragment();
+    }
+
+    private void changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.colorDarkBlue2));
+        }
     }
 }
