@@ -6,7 +6,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/colorDarkBlue"
-    tools:context=".View.Activity.SplashScreenActivity">
+    tools:context=".ui.screens.splash.SplashScreenActivity">
 
     <ImageView
         android:id="@+id/surf_edu"

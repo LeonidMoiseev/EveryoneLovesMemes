@@ -7,10 +7,12 @@
     <color name="colorDarkBlue2">#312F51</color>
     <color name="colorDarkBlue3">#12102B</color>
     <color name="colorBlue">#1EF0D7</color>
+    <color name="colorBlueDisabled">#801EF0D7</color>
     <color name="colorGray">#8AFFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorRed">#FF575D</color>
     <color name="colorDarkGray">#0DFFFFFF</color>
     <color name="colorErrorLoadMemTV">#9FACC7</color>
     <color name="colorGray2">#CCFFFFFF</color>
+    <color name="colorTransparent">#00FFFFFF</color>
 </resources>

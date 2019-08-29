@@ -15,4 +15,9 @@
     <string name="desc_popular_memes">popular memes</string>
     <string name="error_load_memes">Произошла ошибка</string>
     <string name="error_load_memes2">Не удалось загрузить ленту\nОбновите экран или попробуйте позже.</string>
+    <string name="create_mem">Создать</string>
+    <string name="header">Заголовок</string>
+    <string name="text">Текст</string>
+    <string name="from_gallery">Из галереи</string>
+    <string name="make_photo">Сделать фото</string>
 </resources>

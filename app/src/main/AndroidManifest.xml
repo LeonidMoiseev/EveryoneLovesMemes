@@ -5,6 +5,7 @@
     tools:ignore="GoogleAppIndexingWarning">
 
     <application
+        android:name=".data.room.App"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,14 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".View.Activity.ReviewMemActivity"/>
+            android:name=".ui.screens.reviewmem.ReviewMemActivity"/>
         <activity
-            android:name=".View.Activity.MainActivity"
+            android:name=".ui.screens.main.MainActivity"
             android:label="@string/title_activity_main" />
         <activity
-            android:name=".View.Activity.AuthorizationActivity"
+            android:name=".ui.screens.authorization.AuthorizationActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".View.Activity.SplashScreenActivity">
+        <activity android:name=".ui.screens.splash.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
