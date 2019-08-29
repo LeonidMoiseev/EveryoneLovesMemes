@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorDarkBlue2"
     android:orientation="vertical"
-    tools:context=".View.Activity.ReviewMemActivity">
+    tools:context=".ui.screens.reviewmem.ReviewMemActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

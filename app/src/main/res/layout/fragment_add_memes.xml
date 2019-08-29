@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorDarkBlue"
     android:orientation="vertical"
-    tools:context=".View.Fragments.AddMemesFragment">
+    tools:context=".ui.screens.main.fragments.AddMemesFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/colorDarkBlue2">
 
-        <ImageButton
-            android:id="@+id/close_review_mem"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
-            android:background="@drawable/ripple_btn2"
-            android:src="@drawable/ic_close" />
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:text="Создать свой мем"/>
 
         <TextView
             android:id="@+id/create_mem"
@@ -32,88 +33,95 @@
             android:enabled="false"
             android:text="@string/create_mem"
             android:textAllCaps="true"
-            android:textColor="@color/colorBlue"
+            android:textColor="@color/colot_text_create_enabled"
             android:textSize="14sp" />
 
     </RelativeLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <!--    <android.support.v4.widget.NestedScrollView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent">-->
+
+    <RelativeLayout
+        android:id="@+id/fields_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_title_mem"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="16dp"
+            android:hint="@string/header"
+            android:textColorHint="@color/colorGray"
+            app:counterEnabled="true"
+            app:counterMaxLength="140"
+            app:counterOverflowTextAppearance="@style/TextLimitError"
+            app:counterTextAppearance="@style/CounterText"
+            app:hintTextAppearance="@style/HintText">
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_1"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/etTitleMem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginRight="16dp"
-                android:textColorHint="@color/colorGray"
-                android:hint="@string/header"
-                app:counterEnabled="true"
-                app:counterMaxLength="140"
-                app:counterOverflowTextAppearance="@style/TextLimitError"
-                app:counterTextAppearance="@style/CounterText"
-                app:hintTextAppearance="@style/HintText">
+                android:background="@color/colorTransparent"
+                android:textColor="@color/colorWhite"
+                android:textSize="24sp" />
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/etTitleMem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorTransparent"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="24sp"/>
+        </android.support.design.widget.TextInputLayout>
 
-            </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_description_mem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_layout_title_mem"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:hint="@string/text"
+            android:textColorHint="@color/colorGray"
+            app:counterEnabled="true"
+            app:counterMaxLength="1000"
+            app:counterOverflowTextAppearance="@style/TextLimitError"
+            app:counterTextAppearance="@style/CounterText"
+            app:hintTextAppearance="@style/HintText">
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_2"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/etDescriptionMem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/input_layout_1"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:textColorHint="@color/colorGray"
-                android:hint="@string/text"
-                app:counterEnabled="true"
-                app:counterMaxLength="1000"
-                app:counterOverflowTextAppearance="@style/TextLimitError"
-                app:counterTextAppearance="@style/CounterText"
-                app:hintTextAppearance="@style/HintText">
+                android:background="@color/colorTransparent"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp" />
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/etDescriptionMem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorTransparent"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="14sp"/>
+        </android.support.design.widget.TextInputLayout>
 
-            </android.support.design.widget.TextInputLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/input_layout_description_mem">
 
             <ImageView
                 android:id="@+id/myImageMem"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/input_layout_2"/>
+                android:layout_height="wrap_content" />
 
-            <ImageButton
-                android:id="@+id/loadImageMem"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:layout_below="@+id/myImageMem"
-                android:layout_margin="16dp"
-                android:src="@drawable/ic_image"
-                android:background="@drawable/ripple_btn3"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"/>
+        </FrameLayout>
 
-        </RelativeLayout>
+        <ImageButton
+            android:id="@+id/loadImageMem"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:background="@drawable/ripple_btn3"
+            android:src="@drawable/ic_image"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"/>
 
-    </android.support.v4.widget.NestedScrollView>
+    </RelativeLayout>
+
+    <!--    </android.support.v4.widget.NestedScrollView>-->
 
 </LinearLayout>
