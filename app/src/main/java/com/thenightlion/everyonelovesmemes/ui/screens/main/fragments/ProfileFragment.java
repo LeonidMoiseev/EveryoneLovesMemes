@@ -1,7 +1,11 @@
 package com.thenightlion.everyonelovesmemes.ui.screens.main.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +23,9 @@ import android.widget.TextView;
 import com.thenightlion.everyonelovesmemes.R;
 import com.thenightlion.everyonelovesmemes.data.room.MyMemInfo;
 import com.thenightlion.everyonelovesmemes.ui.adapters.MyMemesAdapter;
+import com.thenightlion.everyonelovesmemes.ui.screens.authorization.AuthorizationActivity;
+import com.thenightlion.everyonelovesmemes.ui.screens.main.dialogs.AddImageMemDialog;
+import com.thenightlion.everyonelovesmemes.ui.screens.main.dialogs.ExitProfileDialog;
 import com.thenightlion.everyonelovesmemes.ui.screens.main.presenters.ProfileFragmentPresenter;
 
 import java.util.List;
@@ -32,6 +39,7 @@ public class ProfileFragment extends Fragment implements ProfileFragmentPresente
     private RecyclerView recyclerViewProfile;
     private StaggeredGridLayoutManager layoutManager;
     private ProgressBar progressBar;
+    private DialogFragment dialogFragment;
 
     private ProfileFragmentPresenter presenter;
 
@@ -40,6 +48,7 @@ public class ProfileFragment extends Fragment implements ProfileFragmentPresente
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_profile, container, false);
         presenter = new ProfileFragmentPresenter(this);
+        dialogFragment = ExitProfileDialog.getExitProfileDialog(presenter);
 
         Toolbar toolbar = view.findViewById(R.id.toolbar_profile);
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
@@ -76,11 +85,28 @@ public class ProfileFragment extends Fragment implements ProfileFragmentPresente
     @Override
     public void progressBarEnabled() {
         progressBar.setVisibility(View.VISIBLE);
+        progressBar.bringToFront();
     }
 
     @Override
     public void progressBarDisabled() {
         progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void snackbarError(String error) {
+        Snackbar snackbar = Snackbar.make(view, error, Snackbar.LENGTH_LONG);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(ContextCompat.getColor(Objects.requireNonNull(getActivity()), R.color.colorRed));
+        snackbar.show();
+    }
+
+    @Override
+    public void logoutUser() {
+        Intent startAuthorizationActivity = new Intent(getActivity(), AuthorizationActivity.class);
+        startAuthorizationActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Objects.requireNonNull(getActivity()).startActivity(startAuthorizationActivity);
+        getActivity().finish();
     }
 
     @Override
@@ -95,6 +121,8 @@ public class ProfileFragment extends Fragment implements ProfileFragmentPresente
             case R.id.about_app:
                 break;
             case R.id.exit:
+                assert getFragmentManager() != null;
+                dialogFragment.show(getFragmentManager(), "dialogExitProfileFragment");
                 break;
             default:
                 return super.onOptionsItemSelected(item);
