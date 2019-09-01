@@ -1,13 +1,13 @@
 package com.thenightlion.everyonelovesmemes.ui.screens.authorization;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.thenightlion.everyonelovesmemes.data.api.Service;
-import com.thenightlion.everyonelovesmemes.data.authRepository.UserStorage;
+import com.thenightlion.everyonelovesmemes.utils.SharedPreferencesUtils;
 import com.thenightlion.everyonelovesmemes.data.model.AuthInfoDto;
 import com.thenightlion.everyonelovesmemes.data.model.LoginUserRequestDto;
+import com.thenightlion.everyonelovesmemes.utils.App;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,13 +17,9 @@ public class AuthorizationActivityPresenter {
 
 
     private View view;
-    private Context context;
-    private UserStorage userStorage;
 
-    public AuthorizationActivityPresenter(View view, Context context) {
-        this.userStorage = new UserStorage();
+    public AuthorizationActivityPresenter(View view) {
         this.view = view;
-        this.context = context;
     }
 
     public void checkLoginUser(String login, String password) {
@@ -45,7 +41,7 @@ public class AuthorizationActivityPresenter {
                             AuthInfoDto body = response.body();
                             if (body != null) {
 
-                                userStorage.saveUser(body, context);
+                                saveUserInfo(body);
                                 view.startMainActivity();
 
                             }
@@ -64,7 +60,17 @@ public class AuthorizationActivityPresenter {
                 });
     }
 
-    public void validateForm(String login, String password) {
+    private void saveUserInfo(AuthInfoDto body) {
+        SharedPreferencesUtils sharedPreferencesUtils = App.getInstance().getSharedPreferencesUtils();
+        sharedPreferencesUtils.putString("token", body.getAccessToken());
+        sharedPreferencesUtils.putInt("id");
+        sharedPreferencesUtils.putString("username", body.userInfo.getUserName());
+        sharedPreferencesUtils.putString("firstName", body.userInfo.getFirstName());
+        sharedPreferencesUtils.putString("lastName", body.userInfo.getLastName());
+        sharedPreferencesUtils.putString("userDescription", body.userInfo.getUserDescription());
+    }
+
+    void validateForm(String login, String password) {
         if (TextUtils.isEmpty(login)) {
             view.validateLogin();
         }

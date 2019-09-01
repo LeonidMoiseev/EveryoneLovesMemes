@@ -20,4 +20,6 @@
     <string name="text">Текст</string>
     <string name="from_gallery">Из галереи</string>
     <string name="make_photo">Сделать фото</string>
+    <string name="about_app">О приложении</string>
+    <string name="exit">Выход</string>
 </resources>

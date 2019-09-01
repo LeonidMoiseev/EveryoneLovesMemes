@@ -95,7 +95,6 @@ public class AddMemesFragment extends Fragment implements AddMemesFragmentPresen
     public void setImageMem() {
         Glide.with(Objects.requireNonNull(getActivity()))
                 .load(TEST_IMAGE_URL)
-                .centerCrop()
                 .into(memImage);
         imageLoad = true;
     }

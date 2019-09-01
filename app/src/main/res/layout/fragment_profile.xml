@@ -1,17 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorDarkBlue"
+    android:orientation="vertical"
     tools:context=".ui.screens.main.fragments.ProfileFragment">
 
-    <TextView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_profile"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="profile"
-        android:textColor="@color/colorWhite"
-        android:textSize="30sp"/>
+        android:layout_height="56dp"
+        app:titleTextAppearance="@style/toolbarTitleSize"
+        app:title="Профиль"
+        app:popupTheme="@style/menuStyle"
+        app:titleTextColor="@color/colorWhite"/>
 
-</FrameLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="78dp"
+                android:layout_height="78dp"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_profile_image"
+                    android:layout_centerInParent="true"/>
+
+                <ImageView
+                    android:layout_width="78dp"
+                    android:layout_height="78dp"
+                    android:src="@drawable/circle_for_image_profile"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/username_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                android:textColor="@color/colorWhite"
+                android:text="LittleHallCat_test"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/description_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="description"
+                android:textColor="@color/colorGray"
+                android:layout_marginTop="26dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:textSize="14sp"
+                android:gravity="center"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#312F51"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_profile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:scrollbars="vertical" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>
