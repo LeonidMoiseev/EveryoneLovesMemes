@@ -1,7 +1,11 @@
 package com.thenightlion.everyonelovesmemes.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ErrorResponseDto {
+    @SerializedName("code")
     private String code;
+    @SerializedName("errorMessage")
     private String errorMessage;
 
     public String getCode() {

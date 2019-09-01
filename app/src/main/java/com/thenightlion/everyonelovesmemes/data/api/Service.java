@@ -40,4 +40,7 @@ public class Service {
         return mRetrofit.create(MemesApi.class);
     }
 
+    public LogoutApi getLogoutApi() {
+        return mRetrofit.create(LogoutApi.class);
+    }
 }

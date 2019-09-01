@@ -62,7 +62,7 @@ public class AddMemesFragment extends Fragment implements AddMemesFragmentPresen
     private void initButtonsListener() {
         btnLoadImageMem.setOnClickListener(v -> {
             assert getFragmentManager() != null;
-            dialogFragment.show(getFragmentManager(), "dialogFragment");
+            dialogFragment.show(getFragmentManager(), "dialogAddMemesFragment");
         });
 
         createMem.setOnClickListener(v -> {

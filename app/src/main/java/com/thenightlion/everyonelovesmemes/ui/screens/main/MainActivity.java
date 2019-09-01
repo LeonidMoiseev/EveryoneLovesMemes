@@ -28,8 +28,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         changeStatusBarColor();
-
-        fragmentNavigator = FragmentNavigator.getInstance(this);
+        fragmentNavigator = new FragmentNavigator(this);
 
         if (savedInstanceState == null) {
             createFragments();

@@ -1,6 +1,5 @@
 package com.thenightlion.everyonelovesmemes.ui.screens.main;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -13,11 +12,9 @@ import java.util.List;
 
 public class FragmentNavigator {
 
-    @SuppressLint("StaticFieldLeak")
-    private static FragmentNavigator mInstance;
     private Context context;
 
-    private FragmentNavigator(Context context) {
+    public FragmentNavigator(Context context) {
         this.context = context;
     }
 
@@ -52,12 +49,5 @@ public class FragmentNavigator {
                 return fragment;
         }
         return null;
-    }
-
-    public static FragmentNavigator getInstance(Context context) {
-        if (mInstance == null) {
-            mInstance = new FragmentNavigator(context);
-        }
-        return mInstance;
     }
 }
