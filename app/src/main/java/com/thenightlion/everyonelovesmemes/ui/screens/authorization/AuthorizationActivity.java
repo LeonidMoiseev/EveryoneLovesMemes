@@ -39,7 +39,7 @@ public class AuthorizationActivity extends AppCompatActivity implements Authoriz
         setContentView(R.layout.activity_authorization);
 
         initView();
-        authPresenter = new AuthorizationActivityPresenter(this, this);
+        authPresenter = new AuthorizationActivityPresenter(this);
 
         btnAuthorization.setOnClickListener(v -> {
 

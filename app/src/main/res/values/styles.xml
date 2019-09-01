@@ -47,4 +47,14 @@
         <item name="colorAccent">@color/colorBlue</item>
     </style>
 
+    <style name="menuStyle" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/colorDarkBlue2</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:windowTitleSize">20sp</item>
+    </style>
+
+    <style name="toolbarTitleSize" parent="@style/Base.TextAppearance.AppCompat.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>

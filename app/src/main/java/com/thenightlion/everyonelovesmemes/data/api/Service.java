@@ -1,7 +1,5 @@
 package com.thenightlion.everyonelovesmemes.data.api;
 
-import com.thenightlion.everyonelovesmemes.data.authRepository.AuthApi;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

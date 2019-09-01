@@ -20,7 +20,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:textColor="@color/colorWhite"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:text="Создать свой мем"/>
 
         <TextView

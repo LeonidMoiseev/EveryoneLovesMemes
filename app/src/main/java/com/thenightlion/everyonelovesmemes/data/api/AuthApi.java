@@ -1,4 +1,4 @@
-package com.thenightlion.everyonelovesmemes.data.authRepository;
+package com.thenightlion.everyonelovesmemes.data.api;
 
 import com.thenightlion.everyonelovesmemes.data.model.AuthInfoDto;
 import com.thenightlion.everyonelovesmemes.data.model.LoginUserRequestDto;

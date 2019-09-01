@@ -3,7 +3,7 @@ package com.thenightlion.everyonelovesmemes.ui.screens.main.presenters;
 import android.text.TextUtils;
 
 import com.thenightlion.everyonelovesmemes.data.model.MemDto;
-import com.thenightlion.everyonelovesmemes.data.room.App;
+import com.thenightlion.everyonelovesmemes.utils.App;
 import com.thenightlion.everyonelovesmemes.data.room.AppDatabase;
 import com.thenightlion.everyonelovesmemes.data.room.MyMemInfo;
 import com.thenightlion.everyonelovesmemes.data.room.MyMemInfoDao;
