@@ -67,7 +67,7 @@ public class DashboardFragment extends Fragment implements DashboardFragmentPres
     }
 
     @Override
-    public void initRecyclerView(List<MemDto> memDto) {
+    public void initAdapterForRecyclerView(List<MemDto> memDto) {
         MemesAdapter memesAdapter = new MemesAdapter(getContext(), memDto);
         memesAdapter.notifyDataSetChanged();
 

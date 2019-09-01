@@ -2,9 +2,11 @@ package com.thenightlion.everyonelovesmemes.ui.screens.main.fragments;
 
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -69,7 +71,16 @@ public class AddMemesFragment extends Fragment implements AddMemesFragmentPresen
             presenter.updateDescriptionMem(descriptionMem);
             presenter.updatePhotoUtl(TEST_IMAGE_URL);
             presenter.addMemInDatabase();
+            showSnackbarMemCreate();
         });
+    }
+
+    private void showSnackbarMemCreate() {
+        Snackbar snackbar = Snackbar.make(view, "Мем Создан", Snackbar.LENGTH_LONG);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(ContextCompat.getColor(Objects.requireNonNull(getActivity()),
+                R.color.colorDarkBlue2));
+        snackbar.show();
     }
 
     private void addTextChangedListener() {

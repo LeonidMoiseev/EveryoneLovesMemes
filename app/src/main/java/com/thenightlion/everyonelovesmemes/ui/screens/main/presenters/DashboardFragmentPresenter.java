@@ -31,7 +31,7 @@ public class DashboardFragmentPresenter {
                     public void onResponse(@NonNull Call<List<MemDto>> call, @NonNull Response<List<MemDto>> response) {
                         if (response.body() != null) {
                             memDtoList = response.body();
-                            view.initRecyclerView(memDtoList);
+                            view.initAdapterForRecyclerView(memDtoList);
                         } else {
                             view.errorLogin();
                             view.textErrorVisible();
@@ -49,7 +49,7 @@ public class DashboardFragmentPresenter {
     }
 
     public interface View {
-        void initRecyclerView(List<MemDto> memDto);
+        void initAdapterForRecyclerView(List<MemDto> memDto);
         void progressBarDisabled();
         void textErrorVisible();
         void textErrorInvisible();
