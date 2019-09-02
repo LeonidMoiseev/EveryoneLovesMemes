@@ -56,6 +56,15 @@ public class MemesAdapter extends RecyclerView.Adapter<MemesAdapter.MyViewHolder
             startReviewMem.putExtra("listMemDto", (Serializable) mListMem);
             context.startActivity(startReviewMem);
         });
+
+        myViewHolder.memShare.setOnClickListener(v -> {
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            String shareBody = mListMem.get(i).getTitle() + "\n\n" + mListMem.get(i).getDescription() + "\n" + mListMem.get(i).getPhotoUtl();
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+            context.startActivity(Intent.createChooser(sharingIntent, "Share mem to.."));
+        });
     }
 
     @Override
