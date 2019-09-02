@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
@@ -39,6 +40,7 @@ public class ReviewMemActivity extends AppCompatActivity {
         changeStatusBarColor();
         initView();
         getInfoFromExtra();
+        initShareButtonListener();
 
         closeActivity.setOnClickListener(v -> finish());
 
@@ -73,6 +75,17 @@ public class ReviewMemActivity extends AppCompatActivity {
         memTitle = findViewById(R.id.mem_title);
         memDateCreated = findViewById(R.id.mem_date_created);
         memDescription = findViewById(R.id.mem_description);
+    }
+
+    private void initShareButtonListener() {
+        shareMem.setOnClickListener(v -> {
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            String shareBody = listMemDto.get(memNumberCell).getTitle() + "\n\n" + listMemDto.get(memNumberCell).getDescription() + "\n" + listMemDto.get(memNumberCell).getPhotoUtl();
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(sharingIntent, "Share mem to.."));
+        });
     }
 
     private void changeStatusBarColor() {
