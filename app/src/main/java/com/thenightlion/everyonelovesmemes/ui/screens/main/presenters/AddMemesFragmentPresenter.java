@@ -1,5 +1,7 @@
 package com.thenightlion.everyonelovesmemes.ui.screens.main.presenters;
 
+import android.Manifest;
+import android.content.Intent;
 import android.text.TextUtils;
 
 import com.thenightlion.everyonelovesmemes.data.model.MemDto;
@@ -12,6 +14,10 @@ public class AddMemesFragmentPresenter {
 
     private MemDto memDto;
     private View view;
+    public static final int PICK_IMAGE_REQUEST = 33;
+    public static final int CAMERA_REQUEST = 34;
+    public static final int REQUEST_CODE_PERMISSION_READ_EXTERNAL_STORAGE = 1;
+    public static final int REQUEST_CODE_PERMISSION_CAMERA = 2;
 
     public AddMemesFragmentPresenter(View view) {
         this.memDto = new MemDto();
@@ -26,8 +32,8 @@ public class AddMemesFragmentPresenter {
         memDto.setDescription(description);
     }
 
-    public void updatePhotoUtl(String url) {
-        memDto.setPhotoUtl(url);
+    public void updatePhotoUri(String uri) {
+        memDto.setPhotoUtl(uri);
     }
 
     public void addMemInDatabase() {
@@ -49,8 +55,30 @@ public class AddMemesFragmentPresenter {
         }
     }
 
+    public void checkExistPermissionReadExternalStorage() {
+        if (App.getInstance().getPermissionsUtils().checkPermissionReadExternalStorage()) {
+
+            view.startActivityChooseImage(App.getInstance().getOpenGalleryAndCameraUtils().getGalleryIntent());
+
+        } else view.startRequestPermission(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
+                REQUEST_CODE_PERMISSION_READ_EXTERNAL_STORAGE);
+    }
+
+    public void checkPermissionCamera() {
+        if (App.getInstance().getPermissionsUtils().checkPermissionCamera()) {
+
+            view.startActivityCamera(App.getInstance().getOpenGalleryAndCameraUtils().getCameraIntent());
+
+        } else view.startRequestPermission(new String[] {Manifest.permission.CAMERA},
+                REQUEST_CODE_PERMISSION_CAMERA);
+    }
+
+
     public interface View {
         void enabledButtonCreateMem();
         void disabledButtonCreateMem();
+        void startActivityChooseImage(Intent intent);
+        void startActivityCamera(Intent intent);
+        void startRequestPermission(String[] permission, int requestCode);
     }
 }
