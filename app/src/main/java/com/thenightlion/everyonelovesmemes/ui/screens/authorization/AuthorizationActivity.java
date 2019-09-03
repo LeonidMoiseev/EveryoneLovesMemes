@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -111,6 +112,7 @@ public class AuthorizationActivity extends AppCompatActivity implements Authoriz
 
     private void initView() {
         loginET = findViewById(R.id.login_edit_text);
+        loginET.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
         passwordET = findViewById(R.id.password_edit_text);
         btnAuthorization = findViewById(R.id.button_authorization);
         progressBar = findViewById(R.id.progressBar);

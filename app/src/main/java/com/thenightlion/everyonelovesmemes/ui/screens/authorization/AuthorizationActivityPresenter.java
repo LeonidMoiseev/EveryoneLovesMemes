@@ -18,11 +18,11 @@ public class AuthorizationActivityPresenter {
 
     private View view;
 
-    public AuthorizationActivityPresenter(View view) {
+    AuthorizationActivityPresenter(View view) {
         this.view = view;
     }
 
-    public void checkLoginUser(String login, String password) {
+    void checkLoginUser(String login, String password) {
 
         view.progressBarEnabled();
 
