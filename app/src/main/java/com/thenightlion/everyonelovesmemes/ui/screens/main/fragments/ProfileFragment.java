@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
@@ -24,7 +25,6 @@ import com.thenightlion.everyonelovesmemes.R;
 import com.thenightlion.everyonelovesmemes.data.room.MyMemInfo;
 import com.thenightlion.everyonelovesmemes.ui.adapters.MyMemesAdapter;
 import com.thenightlion.everyonelovesmemes.ui.screens.authorization.AuthorizationActivity;
-import com.thenightlion.everyonelovesmemes.ui.screens.main.dialogs.AddImageMemDialog;
 import com.thenightlion.everyonelovesmemes.ui.screens.main.dialogs.ExitProfileDialog;
 import com.thenightlion.everyonelovesmemes.ui.screens.main.presenters.ProfileFragmentPresenter;
 
@@ -40,6 +40,7 @@ public class ProfileFragment extends Fragment implements ProfileFragmentPresente
     private StaggeredGridLayoutManager layoutManager;
     private ProgressBar progressBar;
     private DialogFragment dialogFragment;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private ProfileFragmentPresenter presenter;
 
@@ -56,10 +57,15 @@ public class ProfileFragment extends Fragment implements ProfileFragmentPresente
         setHasOptionsMenu(true);
 
         initView();
+        pullToRefresh();
         presenter.setProfileInformation();
         presenter.getMyMemesFromDatabase();
 
         return view;
+    }
+
+    private void pullToRefresh() {
+        swipeRefreshLayout.setOnRefreshListener(() -> presenter.getMyMemesFromDatabase());
     }
 
     @Override
@@ -91,6 +97,9 @@ public class ProfileFragment extends Fragment implements ProfileFragmentPresente
     @Override
     public void progressBarDisabled() {
         progressBar.setVisibility(View.INVISIBLE);
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     @Override
@@ -143,5 +152,7 @@ public class ProfileFragment extends Fragment implements ProfileFragmentPresente
         recyclerViewProfile.setItemAnimator(new DefaultItemAnimator());
         layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         progressBar = view.findViewById(R.id.progressBarProfile);
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_content_profile);
+        swipeRefreshLayout.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.colorBlue));
     }
 }

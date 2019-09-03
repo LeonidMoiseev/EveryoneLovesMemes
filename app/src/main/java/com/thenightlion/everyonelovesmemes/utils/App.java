@@ -9,7 +9,9 @@ public class App  extends Application {
     public static App instance;
 
     private SharedPreferencesUtils sharedPreferencesUtils;
+    private OpenGalleryAndCameraUtils openGalleryAndCameraUtils;
     private AppDatabase database;
+    private PermissionsUtils permissionsUtils;
 
     @Override
     public void onCreate() {
@@ -19,6 +21,8 @@ public class App  extends Application {
                 .allowMainThreadQueries()
                 .build();
         sharedPreferencesUtils = new SharedPreferencesUtils(instance);
+        permissionsUtils = new PermissionsUtils(instance);
+        openGalleryAndCameraUtils = new OpenGalleryAndCameraUtils(instance);
     }
 
     public static App getInstance() {
@@ -34,5 +38,13 @@ public class App  extends Application {
 
     public SharedPreferencesUtils getSharedPreferencesUtils() {
         return sharedPreferencesUtils;
+    }
+
+    public PermissionsUtils getPermissionsUtils() {
+        return permissionsUtils;
+    }
+
+    public OpenGalleryAndCameraUtils getOpenGalleryAndCameraUtils() {
+        return openGalleryAndCameraUtils;
     }
 }
