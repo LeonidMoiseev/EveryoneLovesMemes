@@ -10,15 +10,15 @@ import com.thenightlion.everyonelovesmemes.R;
 
 import java.util.List;
 
-public class FragmentNavigator {
+class FragmentNavigator {
 
     private Context context;
 
-    public FragmentNavigator(Context context) {
+    FragmentNavigator(Context context) {
         this.context = context;
     }
 
-    public void setFragment(Fragment fragment, String tag) {
+    void setFragment(Fragment fragment, String tag) {
         Fragment fragmentTarget = ((FragmentActivity)context).getSupportFragmentManager().findFragmentByTag(tag);
         if (fragmentTarget == null) {
             FragmentTransaction fragmentTransaction = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
@@ -27,7 +27,7 @@ public class FragmentNavigator {
         } else showHideFragment(fragment);
     }
 
-    public void showHideFragment(final Fragment fragment){
+    void showHideFragment(final Fragment fragment){
         FragmentTransaction ft = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
         ft.setCustomAnimations(android.R.animator.fade_in,
                 android.R.animator.fade_out);
@@ -41,7 +41,7 @@ public class FragmentNavigator {
         ft.commit();
     }
 
-    public Fragment getVisibleFragment(){
+    Fragment getVisibleFragment(){
         FragmentManager fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
         for(Fragment fragment : fragments){

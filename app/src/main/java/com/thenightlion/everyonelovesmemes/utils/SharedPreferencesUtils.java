@@ -8,7 +8,7 @@ public class SharedPreferencesUtils {
     private static final String DEFAULT_STRING_VALUE = "default";
     private SharedPreferences sharedPreferences;
 
-    public SharedPreferencesUtils(Context context) {
+    SharedPreferencesUtils(Context context) {
         this.sharedPreferences = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
     }
 
