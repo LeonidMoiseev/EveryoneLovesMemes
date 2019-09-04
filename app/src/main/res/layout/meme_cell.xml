@@ -16,6 +16,7 @@
 
         <ImageView
             android:id="@+id/memImage"
+            android:transitionName="memImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -23,6 +24,7 @@
             android:id="@+id/memTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:transitionName="memTitle"
             android:maxLines="1"
             android:textSize="16sp"
             android:paddingLeft="10dp"
@@ -42,6 +44,7 @@
 
             <ImageButton
                 android:id="@+id/memFavorite"
+                android:transitionName="memFavorite"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="20dp"
@@ -50,6 +53,7 @@
 
             <ImageButton
                 android:id="@+id/memShare"
+                android:transitionName="memShare"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_share"

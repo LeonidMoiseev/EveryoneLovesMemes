@@ -42,6 +42,7 @@ public class DashboardFragment extends Fragment implements DashboardFragmentPres
 
         initView();
         pullToRefresh();
+        presenter.loadMemes();
 
         progressBarEnabled();
 
@@ -79,7 +80,7 @@ public class DashboardFragment extends Fragment implements DashboardFragmentPres
     @Override
     public void onStart() {
         super.onStart();
-        presenter.loadMemes();
+        //presenter.loadMemes();
     }
 
     @Override
