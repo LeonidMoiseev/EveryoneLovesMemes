@@ -15,13 +15,16 @@ public class DashboardFragmentPresenter {
 
     private View view;
     private List<MemDto> memDtoList;
+    private boolean firstLoad = true;
 
     public DashboardFragmentPresenter(View view) {
         this.view = view;
     }
 
     public void loadMemes() {
-        view.textErrorInvisible();
+        if (firstLoad) {
+            view.hideViewStubErrorLoadList();
+        }
 
         Service.getInstance()
                 .getMemesApi()
@@ -32,9 +35,12 @@ public class DashboardFragmentPresenter {
                         if (response.body() != null) {
                             memDtoList = response.body();
                             view.initAdapterForRecyclerView(memDtoList);
+                            firstLoad = false;
                         } else {
                             view.errorLogin();
-                            view.textErrorVisible();
+                            if (firstLoad) {
+                                view.showViewStubErrorLoadList();
+                            }
                         }
                         view.progressBarDisabled();
                     }
@@ -42,17 +48,24 @@ public class DashboardFragmentPresenter {
                     @Override
                     public void onFailure(@NonNull Call<List<MemDto>> call, @NonNull Throwable t) {
                         view.errorLogin();
-                        view.textErrorVisible();
+                        if (firstLoad) {
+                            view.showViewStubErrorLoadList();
+                        }
                         view.progressBarDisabled();
                     }
                 });
     }
 
+    public void callMethodHideAndShowStub() {
+        view.hideAndShowStub();
+    }
+
     public interface View {
         void initAdapterForRecyclerView(List<MemDto> memDto);
         void progressBarDisabled();
-        void textErrorVisible();
-        void textErrorInvisible();
+        void showViewStubErrorLoadList();
+        void hideViewStubErrorLoadList();
         void errorLogin();
+        void hideAndShowStub();
     }
 }

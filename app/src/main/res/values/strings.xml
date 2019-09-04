@@ -7,14 +7,14 @@
     <string name="btn_authorization">Войти</string>
     <string name="error_validate">Поле не может быть пустым</string>
     <string name="hint_password_length">Пароль должен содержать 10 символов</string>
-    <string name="error_login_or_password">Во время запроса произошла ошибка, возможно вы неверно ввели логин/пароль</string>
+    <string name="error_login_or_password">Во время запроса произошла ошибка..</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="desc_popular_memes">popular memes</string>
-    <string name="error_load_memes">Произошла ошибка</string>
-    <string name="error_load_memes2">Не удалось загрузить ленту\nОбновите экран или попробуйте позже.</string>
+    <string name="error_load_memes">Произошла ошибка, проверьте подключение к интернету</string>
+    <string name="error_load_memes2">Не удалось загрузить ленту\nОбновите экран или попробуйте позже</string>
     <string name="create_mem">Создать</string>
     <string name="header">Заголовок</string>
     <string name="text">Текст</string>
@@ -22,4 +22,5 @@
     <string name="make_photo">Сделать фото</string>
     <string name="about_app">О приложении</string>
     <string name="exit">Выход</string>
+    <string name="error_empty_search">Поиск не дал результатов..</string>
 </resources>
