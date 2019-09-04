@@ -1,8 +1,11 @@
 package com.thenightlion.everyonelovesmemes.ui.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -54,7 +57,13 @@ public class MemesAdapter extends RecyclerView.Adapter<MemesAdapter.MyViewHolder
             Intent startReviewMem = new Intent(context, ReviewMemActivity.class);
             startReviewMem.putExtra("memNumberCell", i);
             startReviewMem.putExtra("listMemDto", (Serializable) mListMem);
-            context.startActivity(startReviewMem);
+            Pair<View, String> p1 = Pair.create(myViewHolder.memImage, "memImage");
+            Pair<View, String> p2 = Pair.create(myViewHolder.memTitle, "memTitle");
+            Pair<View, String> p3 = Pair.create(myViewHolder.memFavorite, "memFavorite");
+            Pair<View, String> p4 = Pair.create(myViewHolder.memShare, "memShare");
+            ActivityOptionsCompat options = ActivityOptionsCompat.
+                    makeSceneTransitionAnimation((Activity) context, p1, p2, p3, p4);
+            context.startActivity(startReviewMem, options.toBundle());
         });
 
         myViewHolder.memShare.setOnClickListener(v -> {
