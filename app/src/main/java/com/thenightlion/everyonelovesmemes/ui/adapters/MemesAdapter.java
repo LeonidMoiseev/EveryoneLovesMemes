@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,19 +20,26 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.thenightlion.everyonelovesmemes.data.model.MemDto;
 import com.thenightlion.everyonelovesmemes.R;
+import com.thenightlion.everyonelovesmemes.ui.screens.main.presenters.DashboardFragmentPresenter;
 import com.thenightlion.everyonelovesmemes.ui.screens.reviewmem.ReviewMemActivity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class MemesAdapter extends RecyclerView.Adapter<MemesAdapter.MyViewHolder> {
+public class MemesAdapter extends RecyclerView.Adapter<MemesAdapter.MyViewHolder> implements Filterable {
 
     private Context context;
     private List<MemDto> mListMem;
+    private List<MemDto> mOriginalValues;
+    private List<MemDto> filteredArrList;
 
-    public MemesAdapter(Context context, List<MemDto> mListMem) {
+    private DashboardFragmentPresenter presenter;
+
+    public MemesAdapter(Context context, List<MemDto> mListMem, DashboardFragmentPresenter presenter) {
         this.context = context;
         this.mListMem = mListMem;
+        this.presenter = presenter;
     }
 
     @NonNull
@@ -97,5 +106,49 @@ public class MemesAdapter extends RecyclerView.Adapter<MemesAdapter.MyViewHolder
             memShare = itemView.findViewById(R.id.memShare);
             cellMem = itemView.findViewById(R.id.cell_mem);
         }
+    }
+
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mListMem = (List<MemDto>) results.values;
+                notifyDataSetChanged();
+                presenter.callMethodHideAndShowStub();
+            }
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
+                filteredArrList = new ArrayList<>();
+
+                if (mOriginalValues == null) {
+                    mOriginalValues = new ArrayList<>();
+                    mOriginalValues = mListMem;
+                }
+
+                if (constraint == null || constraint.length() == 0) {
+
+                    results.count = mOriginalValues.size();
+                    results.values = mOriginalValues;
+                } else {
+                    constraint = constraint.toString().toLowerCase();
+                    for (int i = 0; i < mOriginalValues.size(); i++) {
+                        String data = mOriginalValues.get(i).getTitle();
+                        if (data.toLowerCase().contains(constraint.toString())) {
+                            filteredArrList.add(mOriginalValues.get(i));
+                        }
+                    }
+
+                    results.count = filteredArrList.size();
+                    results.values = filteredArrList;
+                }
+                return results;
+            }
+        };
+        return filter;
     }
 }

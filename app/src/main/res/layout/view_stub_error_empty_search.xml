@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/view_stub_empty_search"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorDarkBlue">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/error_empty_search"
+        android:textSize="14sp"
+        android:textColor="@color/colorGray"
+        android:layout_centerInParent="true"
+        android:gravity="center"/>
+
+</RelativeLayout>

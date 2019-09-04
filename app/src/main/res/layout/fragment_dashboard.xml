@@ -13,32 +13,104 @@
         android:background="@color/colorDarkBlue"
         tools:context=".ui.screens.main.fragments.DashboardFragment">
 
-        <RelativeLayout
-            android:id="@+id/myToolbar"
+        <ViewStub
+            android:id="@+id/view_stub_empty_search"
+            android:layout_below="@+id/toolbars"
+            android:inflatedId="@+id/view_stub_empty_search"
+            android:layout="@layout/view_stub_error_empty_search"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@color/colorDarkBlue2"
-            android:elevation="4dp" >
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="Популярные мемы"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-                android:textColor="@color/colorWhite"/>
+        <ViewStub
+            android:id="@+id/view_stub_error_load_list"
+            android:layout_below="@+id/toolbars"
+            android:inflatedId="@+id/view_stub_error_load_list"
+            android:layout="@layout/view_stub_error_load_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"/>
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_search"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:contentDescription="@string/desc_popular_memes"/>
+        <FrameLayout
+            android:id="@+id/toolbars"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/toolbar_search"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:focusableInTouchMode="true"
+                android:elevation="4dp"
+                android:background="@color/colorDarkBlue2">
+
+                <ImageButton
+                    android:id="@+id/btn_back"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:background="@drawable/ripple_btn2"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"/>
+
+                <ImageButton
+                    android:id="@+id/clear_text"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_close"
+                    android:background="@drawable/ripple_btn2"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"/>
+
+                <EditText
+                    android:id="@+id/search_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/btn_back"
+                    android:layout_toLeftOf="@id/clear_text"
+                    android:layout_marginLeft="36dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@android:color/transparent"
+                    android:layout_centerVertical="true"
+                    android:hint="Поиск"
+                    android:textColor="@color/colorWhite"
+                    android:textColorHint="@color/colorGray"
+                    android:textSize="17sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/toolbar_dashboard"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/colorDarkBlue2"
+                android:elevation="4dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Популярные мемы"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:textColor="@color/colorWhite"/>
+
+                <ImageButton
+                    android:id="@+id/btn_search"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_search"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:contentDescription="@string/desc_popular_memes"
+                    android:background="@drawable/ripple_btn2"/>
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
 
         <ProgressBar
             android:id="@+id/progressBarLoadMemes"
@@ -48,21 +120,10 @@
             android:theme="@style/CircularProgress2"
             android:visibility="invisible" />
 
-        <TextView
-            android:id="@+id/errorLoadMemesTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="@string/error_load_memes2"
-            android:textColor="@color/colorErrorLoadMemTV"
-            android:textSize="14sp"
-            android:visibility="invisible" />
-
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/myToolbar">
+            android:layout_below="@+id/toolbars">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view"
