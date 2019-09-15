@@ -129,12 +129,6 @@ public class AddMemesFragment extends Fragment implements AddMemesFragmentPresen
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
-
-    @Override
     public void startActivityChooseImage(Intent intent) {
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
@@ -188,5 +182,11 @@ public class AddMemesFragment extends Fragment implements AddMemesFragmentPresen
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 }

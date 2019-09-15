@@ -1,6 +1,5 @@
 package com.thenightlion.everyonelovesmemes.ui.screens.authorization;
 
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.thenightlion.everyonelovesmemes.data.api.Service;
@@ -9,9 +8,10 @@ import com.thenightlion.everyonelovesmemes.data.model.AuthInfoDto;
 import com.thenightlion.everyonelovesmemes.data.model.LoginUserRequestDto;
 import com.thenightlion.everyonelovesmemes.utils.App;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class AuthorizationActivityPresenter {
 
@@ -30,34 +30,30 @@ public class AuthorizationActivityPresenter {
         body.setLogin(login);
         body.setPassword(password);
 
-        Service.getInstance()
-                .getAuthApi()
-                .login(body)
-                .enqueue(new Callback<AuthInfoDto>() {
+        Service.getInstance().getAuthApi().login(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<AuthInfoDto>() {
                     @Override
-                    public void onResponse(@NonNull Call<AuthInfoDto> call, @NonNull Response<AuthInfoDto> response) {
-                        if (response.isSuccessful()) {
+                    public void onSubscribe(Disposable d) {
 
-                            AuthInfoDto body = response.body();
-                            if (body != null) {
-
-                                saveUserInfo(body);
-                                view.startMainActivity();
-
-                            }
-                        } else {
-                            view.errorAuthorization();
-                        }
-
-                        view.progressBarDisabled();
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<AuthInfoDto> call, @NonNull Throwable t) {
+                    public void onSuccess(AuthInfoDto authInfoDto) {
+                        view.progressBarDisabled();
+
+                        saveUserInfo(authInfoDto);
+                        view.startMainActivity();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
                         view.errorAuthorization();
                         view.progressBarDisabled();
                     }
                 });
+
     }
 
     private void saveUserInfo(AuthInfoDto body) {

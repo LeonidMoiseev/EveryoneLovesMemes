@@ -25,14 +25,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        initView();
         changeStatusBarColor();
+
         fragmentNavigator = new FragmentNavigator(this);
 
         if (savedInstanceState == null) {
             createFragments();
             fragmentNavigator.setFragment(dashboardFragment, "dashboardFragment");
+        } else {
+            Fragment fragment = getSupportFragmentManager()
+                    .findFragmentByTag(savedInstanceState.getString("KEY"));
+            fragmentNavigator.setFragment(fragment, savedInstanceState.getString("KEY"));
         }
     }
 
@@ -40,16 +44,13 @@ public class MainActivity extends AppCompatActivity {
             = item -> {
         switch (item.getItemId()) {
             case R.id.navigation_dashboard:
-                fragmentNavigator.showHideFragment(fragmentNavigator.getVisibleFragment());
-                fragmentNavigator.setFragment(dashboardFragment, "dashboardFragment");
+                fragmentNavigator.checkHideAndShowFragment(dashboardFragment, "dashboardFragment");
                 return true;
             case R.id.navigation_add_circle:
-                fragmentNavigator.showHideFragment(fragmentNavigator.getVisibleFragment());
-                fragmentNavigator.setFragment(addMemesFragment, "addMemesFragment");
+                fragmentNavigator.checkHideAndShowFragment(addMemesFragment, "addMemesFragment");
                 return true;
             case R.id.navigation_person:
-                fragmentNavigator.showHideFragment(fragmentNavigator.getVisibleFragment());
-                fragmentNavigator.setFragment(profileFragment, "profileFragment");
+                fragmentNavigator.checkHideAndShowFragment(profileFragment, "profileFragment");
                 return true;
         }
         return true;
@@ -72,14 +73,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
-        //outState.putString("KEY", "dashboardFragment");
+        outState.putString("KEY", fragmentNavigator.getVisibleFragment().getTag());
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag("dashboardFragment");
-        fragmentNavigator.setFragment(fragment, "dashboardFragment");
-        //Toast.makeText(this, savedInstanceState.getString("KEY"), Toast.LENGTH_SHORT).show();
+    private void initView() {
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 }

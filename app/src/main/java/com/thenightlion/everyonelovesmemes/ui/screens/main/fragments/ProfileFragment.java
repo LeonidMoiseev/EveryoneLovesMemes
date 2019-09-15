@@ -103,7 +103,7 @@ public class ProfileFragment extends Fragment implements ProfileFragmentPresente
     }
 
     @Override
-    public void snackbarError(String error) {
+    public void snackBarError(String error) {
         Snackbar snackbar = Snackbar.make(view, error, Snackbar.LENGTH_LONG);
         View sbView = snackbar.getView();
         sbView.setBackgroundColor(ContextCompat.getColor(Objects.requireNonNull(getActivity()), R.color.colorRed));
@@ -139,12 +139,6 @@ public class ProfileFragment extends Fragment implements ProfileFragmentPresente
         return true;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
-
     private void initView() {
         usernameProfile = view.findViewById(R.id.username_profile);
         descriptionProfile = view.findViewById(R.id.description_profile);
@@ -154,5 +148,11 @@ public class ProfileFragment extends Fragment implements ProfileFragmentPresente
         progressBar = view.findViewById(R.id.progressBarProfile);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_content_profile);
         swipeRefreshLayout.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.colorBlue));
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 }
