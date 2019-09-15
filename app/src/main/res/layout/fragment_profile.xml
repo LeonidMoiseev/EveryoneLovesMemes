@@ -10,6 +10,7 @@
     tools:context=".ui.screens.main.fragments.ProfileFragment">
 
     <RelativeLayout
+        android:id="@+id/relative_layout_profile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorDarkBlue"
@@ -37,23 +38,27 @@
             android:layout_below="@+id/toolbar_profile">
 
             <LinearLayout
+                android:id="@+id/linear_layout_profile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <RelativeLayout
+                    android:id="@+id/icon_profile_container"
                     android:layout_width="78dp"
                     android:layout_height="78dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp">
 
                     <ImageView
+                        android:id="@+id/icon_profile"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         android:layout_centerInParent="true"
                         android:src="@drawable/ic_profile_image" />
 
                     <ImageView
+                        android:id="@+id/circle_for_icon"
                         android:layout_width="78dp"
                         android:layout_height="78dp"
                         android:src="@drawable/circle_for_image_profile" />
@@ -83,6 +88,7 @@
                     android:textSize="14sp" />
 
                 <View
+                    android:id="@+id/line_view"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="24dp"

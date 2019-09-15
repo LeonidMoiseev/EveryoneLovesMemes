@@ -4,10 +4,10 @@ import com.thenightlion.everyonelovesmemes.data.model.MemDto;
 
 import java.util.List;
 
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 
 public interface MemesApi {
     @GET("/memes")
-    Call<List<MemDto>> getMeme();
+    Single<List<MemDto>> getMeme();
 }

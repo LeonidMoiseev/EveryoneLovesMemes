@@ -103,7 +103,7 @@ public class ProfileFragment extends Fragment implements ProfileFragmentPresente
     }
 
     @Override
-    public void snackbarError(String error) {
+    public void snackBarError(String error) {
         Snackbar snackbar = Snackbar.make(view, error, Snackbar.LENGTH_LONG);
         View sbView = snackbar.getView();
         sbView.setBackgroundColor(ContextCompat.getColor(Objects.requireNonNull(getActivity()), R.color.colorRed));

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/linear_layout_add_memes"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,11 +12,13 @@
     tools:context=".ui.screens.main.fragments.AddMemesFragment">
 
     <RelativeLayout
+        android:id="@+id/toolbar_container"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/colorDarkBlue2">
 
         <TextView
+            android:id="@+id/title_add_memes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -38,10 +41,6 @@
             android:textSize="14sp" />
 
     </RelativeLayout>
-
-    <!--    <android.support.v4.widget.NestedScrollView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent">-->
 
     <RelativeLayout
         android:id="@+id/fields_container"
@@ -99,6 +98,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <FrameLayout
+            android:id="@+id/image_mem_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/input_layout_description_mem">
@@ -122,7 +122,5 @@
             android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
-
-    <!--    </android.support.v4.widget.NestedScrollView>-->
 
 </LinearLayout>
